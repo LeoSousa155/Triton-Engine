@@ -1,0 +1,57 @@
+# Compiler/IDE
+/build/
+/out/
+/bin/
+*.o
+*.a
+*.so
+*.dylib
+*.obj
+*.exe
+*.pdb
+*.idb
+*.ilk
+*.map
+*.sbr
+*.pch
+/ipch/
+*.log
+*.vs
+*.suo
+*.user
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.VCxProj.user
+/ReSharper.Database*
+/_ReSharper*
+*.sln.docstates
+/Debug/
+/Release/
+/x64/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+/lib/CMake/
+install_manifest.txt
+/DartConfiguration.yaml
+
+# OpenGL/GLFW Specific (if built from source in project)
+/glfw/build/  # If you build GLFW from source within the project.
+
+# System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*~
+# Visual Studio Code
+.vscode/
+
+# Qt
+*.user*
+*.pro.user
+
+# Packaging files
+*.swp
+*.lock
