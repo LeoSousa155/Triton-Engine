@@ -4,20 +4,25 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "engine/system/Window.h"
+#include "engine/core/Application.h"
 
-namespace engine {
+namespace core {
 
 
     class Engine {
         public:
             Engine(int width, int height, const char* title);
             ~Engine();
-            void run();
+            void run(Application* app);
     
         private:
-            GLFWwindow* window;
+            sys::Window window;
             int width, height;
-            const char* title;
+            std::string title;
+            float lastTimeFrame = 0.0f;
+
+            EngineContext context;
     
             bool initWindow();
     };

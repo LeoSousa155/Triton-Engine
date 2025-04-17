@@ -1,5 +1,6 @@
-#include "utils/Logger.h"
 #include <iostream>
+
+#include "utils/Logger.h"
 
 
 namespace utils {

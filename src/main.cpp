@@ -1,14 +1,13 @@
-#include "engine/Engine.h"
+#include "engine/core/Engine.h"
 #include "graphics/Shader.h"
 #include "utils/Logger.h"
+#include "game/TestGame.h"
 
 
 int main() {
-    utils::Logger::log("Stating Engine execution...");
 
-    engine::Engine engine(800, 600, "Triton Engine");
-    engine.run();
-
-    utils::Logger::log("Ending Engine execution");
+    core::Engine engine(800, 600, "Triton Engine");
+    TestGame testGame;
+    engine.run(&testGame);
     return 0;
 }

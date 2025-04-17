@@ -1,7 +1,8 @@
-#include "graphics/Shader.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
+
+#include "graphics/Shader.h"
 
 
 namespace graphics {
