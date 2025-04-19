@@ -41,7 +41,13 @@ namespace core {
         utils::Logger::log("Starting Engine execution", utils::LogLevel::INFO);
 
         context.window = &window;
+        context.renderer = &renderer;
         app->onInit(&context);
+
+
+        //apagar
+        renderer.init();
+        
 
         while(!window.shouldClose()) {
             float currentTime = glfwGetTime();
@@ -51,10 +57,15 @@ namespace core {
             app->onUpdate(deltaTime);
             app->onRender();
 
+            //apagar
+            renderer.render();
+
             
             window.swapBuffers();
             glfwPollEvents();
         }
+
+        app->onShutdown();
         utils::Logger::log("Ending Engine execution",utils::LogLevel::INFO);
     }
 }

@@ -1,8 +1,9 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include <string>
 #include <glad/glad.h>
+#include <string>
+#include <vector>
 
 
 namespace graphics {
@@ -19,7 +20,8 @@ namespace graphics {
         public:
             unsigned int ID;
             
-            Shader(const std::string& vertexPath, const std::string& fragmentPath);
+            Shader(const std::string& vertexPath, const std::string& fragmentPath, 
+                const std::vector<std::pair<GLuint, std::string>>& attribBindings = {});
             void use();
             
         private:

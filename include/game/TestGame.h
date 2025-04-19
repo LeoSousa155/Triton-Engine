@@ -2,22 +2,20 @@
 #include "engine/core/Application.h"
 
 class TestGame : public core::Application {
-public:
-    void onInit(core::EngineContext* ctx) override {
-        // carregar cena, texturas, etc
-    }
+    public:
+        void onInit(core::EngineContext* ctx) override {
+            // carregar cena, texturas, etc
+        }
 
-    void onUpdate(float deltaTime) override {
-        // lógica do jogo
-    }
+        void onUpdate(float deltaTime) override {
+            // lógica do jogo
+        }
 
-    void onRender() override {
-        // renderizar objetos
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-    }
+        void onRender() override {
+            // renderizar objetos
+        }
 
-    void onShutdown() override {
-        // liberar recursos
-    }
+        void onShutdown() override {
+            // liberar recursos
+        }
 };

@@ -5,8 +5,11 @@
 #include "graphics/Shader.h"
 
 
+
 namespace graphics {
-    Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath) {
+    Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath, 
+        const std::vector<std::pair<GLuint, std::string>>& attribBindings) {
+
         std::string vertexCode = readFile(vertexPath);
         std::string fragmentCode = readFile(fragmentPath);
     
@@ -29,6 +32,12 @@ namespace graphics {
         ID = glCreateProgram();
         glAttachShader(ID, vertexShader);
         glAttachShader(ID, fragmentShader);
+
+        // Aqui fazes os bindings antes do link
+        for (const auto& binding : attribBindings) {
+            glBindAttribLocation(ID, binding.first, binding.second.c_str());
+        }
+
         glLinkProgram(ID);
         checkCompileErrors(ID, CompileTarget::PROGRAM);
     }

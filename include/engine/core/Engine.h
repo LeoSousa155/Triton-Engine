@@ -5,9 +5,16 @@
 #include <GLFW/glfw3.h>
 
 #include "engine/system/Window.h"
+#include "engine/system/Input.h"
+#include "engine/system/Renderer.h"
+
 #include "engine/core/Application.h"
+#include "engine/core/EngineContext.h"
 
 namespace core {
+
+
+    
 
 
     class Engine {
@@ -18,6 +25,8 @@ namespace core {
     
         private:
             sys::Window window;
+            sys::Renderer renderer;
+
             int width, height;
             std::string title;
             float lastTimeFrame = 0.0f;
