@@ -22,7 +22,7 @@ namespace graphics {
         glShaderSource(vertexShader, 1, &vShaderCode, NULL);
         glShaderSource(fragmentShader, 1, &fShaderCode, NULL);
     
-        glCompileShader(vertexShader);
+        glCompileShader(vertexShader); 
         checkCompileErrors(vertexShader, CompileTarget::VERTEX);
        
         glCompileShader(fragmentShader);
