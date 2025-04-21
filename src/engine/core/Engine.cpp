@@ -49,10 +49,13 @@ namespace core {
 
         app->onInit(&context);
 
-
-        //apagar
-        renderer.init();
-        
+        //apagar ---- teste
+        float vertices[3][3] = {
+            -0.5f, -0.5f, 0.0f,
+             0.5f, -0.5f, 0.0f,
+             0.0f,  0.5f, 0.0f
+        };
+        //----------------
 
         while(!window.shouldClose()) {
             float currentTime = glfwGetTime();
@@ -62,12 +65,30 @@ namespace core {
             app->onUpdate(deltaTime);
             app->onRender();
 
-            //apagar
-            renderer.render();
+            //------------------------------------------------------------------------
+            //apagar ---- teste
+            
+    
+            graphics::Shader* shader = new graphics::Shader(
+                "/home/leo/projects/triton_engine/assets/shaders/vertex.glsl",
+                "/home/leo/projects/triton_engine/assets/shaders/fragment.glsl",
+                {{0, "aPos"}}
+            );
+    
+            graphics::Mesh triangle = graphics::createTriangleMesh(shader, vertices);
+
             if (sys::Input::isKeyPressed(GLFW_KEY_LEFT)) {
                 std::cout << "Tecla esquerda pressionada!" << std::endl;
+                vertices[0][1] += 0.01f;
+                vertices[1][1] += 0.01f;
+                vertices[2][1] += 0.01f;
             }
-            //------
+
+            renderer.submit(triangle);
+            //Triangle rendering
+            renderer.renderAll();
+            renderer.clear();
+            //------------------------------------------------
 
             
             window.swapBuffers();

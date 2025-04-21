@@ -1,4 +1,4 @@
-#include "engine/system/Renderer.h"
+/* #include "engine/system/Renderer.h"
 #include "utils/Logger.h"
 
 
@@ -46,4 +46,4 @@ namespace sys {
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
     }
-}
+} */

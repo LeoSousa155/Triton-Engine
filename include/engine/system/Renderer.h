@@ -1,10 +1,12 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include <vector>
+
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
-#include "graphics/Shader.h"
+#include "graphics/Mesh.h"
 
 namespace sys {
 
@@ -12,24 +14,22 @@ namespace sys {
     /** @brief Manages core rendering setup and execution (currently a simple triangle). */
     class Renderer {
         public:
-            /** @brief Initializes shaders and geometry (VAO/VBO). */
-            bool init();
+            void submit(const graphics::Mesh& mesh) {
+                meshes.push_back(mesh);
+            }
 
+            void renderAll() {
+                for(const auto& mesh : meshes) {
+                    mesh.draw();
+                }
+            }
 
-            /** @brief Renders the current scene (binds VAO and draws). */
-            void render();
-
+            void clear() {
+                meshes.clear();
+            }
 
         private:
-            // --- Attributes ---
-            unsigned int VAO; ///< Vertex Array Object handle.
-            unsigned int VBO; ///< Vertex Buffer Object handle.
-            graphics::Shader* shader = nullptr; ///< Shader program used for rendering.
-            // ---
-
-            
-            /** @brief Sets up VAO/VBO for a hardcoded triangle. */
-            void initTriangle();
+            std::vector<graphics::Mesh> meshes;
     };
 }
 

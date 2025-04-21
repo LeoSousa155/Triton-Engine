@@ -24,7 +24,7 @@ namespace graphics {
     
         glCompileShader(vertexShader); 
         checkCompileErrors(vertexShader, CompileTarget::VERTEX);
-       
+        
         glCompileShader(fragmentShader);
         checkCompileErrors(fragmentShader, CompileTarget::FRAGMENT);
     
