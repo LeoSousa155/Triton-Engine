@@ -8,14 +8,17 @@
 
 namespace sys {
 
+
     /** @brief Manages core rendering setup and execution (currently a simple triangle). */
     class Renderer {
         public:
             /** @brief Initializes shaders and geometry (VAO/VBO). */
             bool init();
 
+
             /** @brief Renders the current scene (binds VAO and draws). */
             void render();
+
 
         private:
             // --- Attributes ---
@@ -24,6 +27,7 @@ namespace sys {
             graphics::Shader* shader = nullptr; ///< Shader program used for rendering.
             // ---
 
+            
             /** @brief Sets up VAO/VBO for a hardcoded triangle. */
             void initTriangle();
     };

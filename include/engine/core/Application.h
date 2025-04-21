@@ -5,6 +5,7 @@
 
 namespace core {
 
+
     /**
      * @class Application
      * @brief Abstract base class (interface) for the user's game or application logic.
@@ -18,12 +19,14 @@ namespace core {
             /** @brief Virtual destructor to ensure proper cleanup of derived classes. */
             virtual ~Application() = default;
 
+
             /**
              * @brief Called once when the application is initialized by the Engine.
              * Use this to load resources, set up initial game state, etc.
              * @param ctx Pointer to the EngineContext, providing access to engine subsystems.
              */
             virtual void onInit(EngineContext* ctx) {}
+
 
             /**
              * @brief Called every frame by the Engine.
@@ -32,12 +35,14 @@ namespace core {
              */
             virtual void onUpdate(float deltaTime) {}
 
+
             /**
              * @brief Called every frame by the Engine after updates, specifically for rendering.
              * Use this to issue draw calls via the Renderer.
              */
             virtual void onRender() {}
 
+            
             /**
              * @brief Called once when the application is about to shut down.
              * Use this to release resources, save state, etc.

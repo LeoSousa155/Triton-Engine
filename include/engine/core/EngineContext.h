@@ -8,6 +8,7 @@
 
 namespace core {
 
+    
     /**
      * @struct EngineContext
      * @brief A container holding pointers to essential engine subsystems.

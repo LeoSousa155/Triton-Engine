@@ -8,13 +8,17 @@
 
 namespace sys {
 
+
     /** @brief Manages a GLFW window and its associated OpenGL context. */
     class Window {
         public:
             /** @brief Constructs a Window object (window pointer initialized to null). */
             Window();
+
+
             /** @brief Destroys the underlying GLFW window if it exists. */
             ~Window();
+
 
             /**
              * @brief Initializes and creates the GLFW window.
@@ -26,14 +30,17 @@ namespace sys {
              */
             bool init(int width, int height, std::string title);
 
+
             /** @brief Swaps the front and back rendering buffers of the window. */
             void swapBuffers();
+
 
             /**
              * @brief Checks if the window has been flagged to close (e.g., user clicked the close button).
              * @return True if the window should close, false otherwise.
              */
             bool shouldClose() const;
+
 
             /**
              * @brief Provides access to the underlying native GLFW window handle.
@@ -42,6 +49,7 @@ namespace sys {
              */
             GLFWwindow* getNativeHandle();
 
+            
         private:
             GLFWwindow* window; ///< Pointer to the underlying GLFW window object managed by this class.
     };

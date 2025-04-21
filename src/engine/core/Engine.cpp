@@ -39,9 +39,14 @@ namespace core {
     void Engine::run(Application* app) {
         if(!initWindow()) return;
         utils::Logger::log("Starting Engine execution", utils::LogLevel::INFO);
-
+        
+        inputHandler.init(window.getNativeHandle());
+        
         context.window = &window;
         context.renderer = &renderer;
+        context.input = &inputHandler;
+
+
         app->onInit(&context);
 
 
@@ -59,6 +64,10 @@ namespace core {
 
             //apagar
             renderer.render();
+            if (sys::Input::isKeyPressed(GLFW_KEY_LEFT)) {
+                std::cout << "Tecla esquerda pressionada!" << std::endl;
+            }
+            //------
 
             
             window.swapBuffers();

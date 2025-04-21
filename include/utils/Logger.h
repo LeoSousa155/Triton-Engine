@@ -7,12 +7,14 @@
 
 namespace utils {
 
+
     /** @brief Defines different severity levels for logging messages. */
     enum class LogLevel {
         INFO,       ///< Informational messages.
         WARNING,    ///< Potential issues or non-critical errors.
         ERROR       ///< Critical errors that might prevent normal operation.
     };
+
 
     /**
      * @class Logger
@@ -37,6 +39,7 @@ namespace utils {
              */
             static std::string getLabel(LogLevel level);
 
+            
             /**
              * @brief Gets the ANSI escape code for coloring the output based on the log level.
              * @param level The log level.

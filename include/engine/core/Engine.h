@@ -11,9 +11,10 @@
 #include "engine/core/Application.h"
 #include "engine/core/EngineContext.h"
 
-#include <string> // Added for std::string usage
+#include <string>
 
 namespace core {
+
 
     /**
      * @class Engine
@@ -29,8 +30,10 @@ namespace core {
              */
             Engine(int width, int height, const char* title);
 
+
             /** @brief Destructor (handles cleanup of member objects like Window). */
             ~Engine();
+
 
             /**
              * @brief Starts the main engine loop.
@@ -39,23 +42,28 @@ namespace core {
              */
             void run(Application* app);
 
+
         private:
             // --- Core Subsystems ---
             sys::Window window;         ///< Manages the application window and OpenGL context.
             sys::Renderer renderer;     ///< Handles rendering operations.
-            // sys::Input inputHandler;
+            sys::Input inputHandler;
+
 
             // --- Window Configuration ---
             int width;                  ///< Initial window width.
             int height;                 ///< Initial window height.
             std::string title;          ///< Initial window title.
 
+
             // --- Timing ---
             float lastTimeFrame = 0.0f; ///< Stores the time of the last frame (for delta time calculation).
+
 
             // --- Context ---
             EngineContext context;      ///< Holds pointers to essential subsystems for Application access.
 
+            
             /**
              * @brief Initializes GLFW and the main application window.
              * @return True if initialization was successful, false otherwise.

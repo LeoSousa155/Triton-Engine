@@ -8,12 +8,14 @@
 
 namespace graphics {
 
+    
     /** @brief Specifies the stage of shader compilation/linking for error checking. */
     enum class CompileTarget {
         VERTEX,     ///< Vertex shader compilation stage.
         FRAGMENT,   ///< Fragment shader compilation stage.
         PROGRAM     ///< Shader program linking stage.
     };
+
 
     /**
      * @class Shader
@@ -25,6 +27,7 @@ namespace graphics {
         public:
             unsigned int ID; ///< The OpenGL handle (ID) for the linked shader program.
 
+
             /**
              * @brief Constructs a Shader object by loading, compiling, and linking shaders.
              * @param vertexPath Path to the vertex shader source file.
@@ -35,8 +38,10 @@ namespace graphics {
             Shader(const std::string& vertexPath, const std::string& fragmentPath,
                    const std::vector<std::pair<GLuint, std::string>>& attribBindings = {});
 
+
             /** @brief Activates this shader program for subsequent rendering calls (glUseProgram). */
             void use();
+
 
         private:
             /**
@@ -46,6 +51,7 @@ namespace graphics {
              * @param type The stage (VERTEX, FRAGMENT, PROGRAM) to check for errors.
              */
             void checkCompileErrors(unsigned int shader, CompileTarget type);
+
 
             /**
              * @brief Reads the entire content of a file into a string.
