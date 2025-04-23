@@ -68,7 +68,7 @@ namespace core {
              * @brief Initializes GLFW and the main application window.
              * @return True if initialization was successful, false otherwise.
              */
-            bool initWindow();
+            bool init();
     };
 }
 

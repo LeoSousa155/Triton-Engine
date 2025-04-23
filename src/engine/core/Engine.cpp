@@ -16,7 +16,7 @@ namespace core {
     }
 
 
-    bool Engine::initWindow() {
+    bool Engine::init() {
         if(!glfwInit()) {
             utils::Logger::log("Unable to initialize the GLFW library", utils::LogLevel::ERROR);
             return false;
@@ -32,30 +32,21 @@ namespace core {
             return false;
         }
 
-        return true;
-    }
-
-
-    void Engine::run(Application* app) {
-        if(!initWindow()) return;
-        utils::Logger::log("Starting Engine execution", utils::LogLevel::INFO);
-        
         inputHandler.init(window.getNativeHandle());
         
         context.window = &window;
         context.renderer = &renderer;
         context.input = &inputHandler;
 
+        return true;
+    }
+
+
+    void Engine::run(Application* app) {
+        if(!init()) return;
+        utils::Logger::log("Starting Engine execution", utils::LogLevel::INFO);
 
         app->onInit(&context);
-
-        //apagar ---- teste
-        float vertices[3][3] = {
-            -0.5f, -0.5f, 0.0f,
-             0.5f, -0.5f, 0.0f,
-             0.0f,  0.5f, 0.0f
-        };
-        //----------------
 
         while(!window.shouldClose()) {
             float currentTime = glfwGetTime();
@@ -64,32 +55,6 @@ namespace core {
 
             app->onUpdate(deltaTime);
             app->onRender();
-
-            //------------------------------------------------------------------------
-            //apagar ---- teste
-            
-    
-            graphics::Shader* shader = new graphics::Shader(
-                "/home/leo/projects/triton_engine/assets/shaders/vertex.glsl",
-                "/home/leo/projects/triton_engine/assets/shaders/fragment.glsl",
-                {{0, "aPos"}}
-            );
-    
-            graphics::Mesh triangle = graphics::createTriangleMesh(shader, vertices);
-
-            if (sys::Input::isKeyPressed(GLFW_KEY_LEFT)) {
-                std::cout << "Tecla esquerda pressionada!" << std::endl;
-                vertices[0][1] += 0.01f;
-                vertices[1][1] += 0.01f;
-                vertices[2][1] += 0.01f;
-            }
-
-            renderer.submit(triangle);
-            //Triangle rendering
-            renderer.renderAll();
-            renderer.clear();
-            //------------------------------------------------
-
             
             window.swapBuffers();
             glfwPollEvents();

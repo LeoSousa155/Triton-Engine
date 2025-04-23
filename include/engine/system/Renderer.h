@@ -11,7 +11,7 @@
 namespace sys {
 
 
-    /** @brief Manages core rendering setup and execution (currently a simple triangle). */
+    /** @brief Manages core rendering setup and execution */
     class Renderer {
         public:
             void submit(const graphics::Mesh& mesh) {
