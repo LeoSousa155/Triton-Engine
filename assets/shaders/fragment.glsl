@@ -4,7 +4,9 @@ in vec3 fragPos;
 
 out vec4 FragColor;
 
+uniform float u_Time;
+
 void main() {
 
-    FragColor = vec4(0.3, fragPos.y, 0.4, 1.0); // cor laranja
+    FragColor = vec4(0.7, fragPos.y, abs(sin(u_Time * 3)) / 2.2, 1.0);
 }

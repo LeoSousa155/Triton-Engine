@@ -1,4 +1,5 @@
 #include "PiramidGame.h"
+#include "engine/system/Input.h"
 #include <cstring> // Required for memcpy
 
 namespace gametest {
@@ -47,8 +48,8 @@ namespace gametest {
 
         // init triangle shader (assuming this path is correct)
         shader = new graphics::Shader(
-            "/home/leo/projects/triton_engine/assets/shaders/vertex3D.glsl",
-            "/home/leo/projects/triton_engine/assets/shaders/fragment.glsl",
+            "../assets/shaders/vertex3D.glsl",
+            "../assets/shaders/fragment.glsl",
             {{0, "aPos"}}
         );
 
@@ -67,7 +68,14 @@ namespace gametest {
         // triangle.updateVertices(vertices, sizeof(vertices));
 
         glm::vec3 cur_rot = piramid.transform.rotation;
-        piramid.transform.rotation = glm::vec3(cur_rot.x, cur_rot.y + 1.0f, cur_rot.z);
+        piramid.transform.rotation = glm::vec3(cur_rot.x, cur_rot.y + 0.3f, cur_rot.z);
+
+        if (sys::Input::isKeyPressed(GLFW_KEY_UP)) {
+            piramid.transform.position.y += 0.01f;
+        }
+        if (sys::Input::isKeyPressed(GLFW_KEY_DOWN)) {
+            piramid.transform.position.y -= 0.01f;
+        }
 
         piramid.updateVertices(vertices, sizeof(vertices)); 
 

@@ -11,6 +11,7 @@ namespace graphics {
         GLuint modelLoc = glGetUniformLocation(shader->ID, "u_Model");
         GLuint viewLoc = glGetUniformLocation(shader->ID, "u_View");
         GLuint projLoc = glGetUniformLocation(shader->ID, "u_Projection");
+        GLint timeLoc = glGetUniformLocation(shader->ID, "u_Time");
 
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform.getMatrix()));
 
@@ -30,6 +31,7 @@ namespace graphics {
 
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+        glUniform1f(timeLoc, glfwGetTime());
 
         // render
         glBindVertexArray(VAO);
