@@ -5,7 +5,7 @@
 namespace graphics {
 
 
-    void Mesh::draw() const {
+    void Mesh::draw(const Camera3D& camera, float aspectRatio) const {
         shader->use();
 
         GLuint modelLoc = glGetUniformLocation(shader->ID, "u_Model");
@@ -16,15 +16,11 @@ namespace graphics {
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform.getMatrix()));
 
         // Define câmera e perspectiva
-        glm::mat4 view = glm::lookAt(
-            glm::vec3(0.0f, 1.5f, 2.5f),  // posição da câmera
-            glm::vec3(0.0f, 0.3f, 0.0f),  // olha pro centro da pirâmide
-            glm::vec3(0.0f, 1.0f, 0.0f)   // eixo "up"
-        );
+        glm::mat4 view = camera.getViewMatrix();
 
         glm::mat4 projection = glm::perspective(
-            glm::radians(45.0f),
-            800.0f / 600.0f,
+            glm::radians(camera.fov),
+            aspectRatio,
             0.1f,
             100.0f
         );

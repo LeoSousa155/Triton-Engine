@@ -13,6 +13,7 @@ namespace core {
 
     Engine::~Engine() {
         glfwTerminate();
+        utils::Logger::log("Engine terminated.", utils::LogLevel::INFO);
     }
 
 
@@ -33,6 +34,11 @@ namespace core {
         }
 
         inputHandler.init(window.getNativeHandle());
+
+        if (!renderer.init()) { // Initialize the renderer
+            utils::Logger::log("Unable to initialize the renderer system", utils::LogLevel::ERROR);
+            return false;
+        }
         
         context.window = &window;
         context.renderer = &renderer;
@@ -61,6 +67,7 @@ namespace core {
         }
 
         app->onShutdown();
+        renderer.shutdown();
         utils::Logger::log("Ending Engine execution",utils::LogLevel::INFO);
     }
 }

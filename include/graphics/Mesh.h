@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include "graphics/Shader.h"
+#include "graphics/Camera.h"
 #include "math/Transform3D.h"
 
 namespace graphics {
@@ -17,7 +18,7 @@ namespace graphics {
         GLsizei vertexCount;
         math::Transform3D transform;
     
-        void draw() const;
+        void draw(const Camera3D& camera, float aspetRatio) const;
         void updateVertices(const void* data, size_t size);
     };
 

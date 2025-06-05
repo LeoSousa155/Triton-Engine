@@ -1,49 +1,51 @@
-/* #include "engine/system/Renderer.h"
+#include "engine/system/Renderer.h"
 #include "utils/Logger.h"
+
+#include "graphics/Mesh.h"
+#include "graphics/Camera.h"
 
 
 namespace sys {
+    Renderer::Renderer() : activeCamera(nullptr), currentAspectRatio(800.0f / 600.0f) {
+        utils::Logger::log("Renderer created.", utils::LogLevel::INFO);
+    }
 
+    Renderer::~Renderer() {
+        utils::Logger::log("Renderer destroyed.", utils::LogLevel::INFO);
+    }
 
     bool Renderer::init() {
-        shader = new graphics::Shader(
-            "/home/leo/projects/triton_engine/assets/shaders/vertex.glsl",
-            "/home/leo/projects/triton_engine/assets/shaders/fragment.glsl",
-            {{0, "aPos"}}
-        );
-        shader->use();
-
-        initTriangle();
-        return true;
+       utils::Logger::log("Renderer initialized.", utils::LogLevel::INFO);
+       return true;
     }
 
-
-    void Renderer::initTriangle() {
-        float vertices[] = {
-            -0.5f, -0.5f, 0.0f,
-             0.5f, -0.5f, 0.0f,
-             0.0f,  0.5f, 0.0f
-        };
-        
-        glGenVertexArrays(1, &VAO);
-        glGenBuffers(1, &VBO);
-
-        glBindVertexArray(VAO);
-
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0);
-
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
+    void Renderer::shutdown() {
+        utils::Logger::log("Renderer shutdown.", utils::LogLevel::INFO);
+        meshQueue.clear();
+        activeCamera = nullptr;
     }
 
-
-    void Renderer::render() {
-        shader->use();
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+    void Renderer::beginFrame(const graphics::Camera3D& camera, float aspectRatio) {
+        this->activeCamera = &camera;
+        this->currentAspectRatio = aspectRatio;
     }
-} */
+
+    void Renderer::submit(const graphics::Mesh& mesh) {
+        meshQueue.push_back(mesh);
+    }
+
+    void Renderer::renderAll() {
+        if (!activeCamera) {
+            utils::Logger::log("Renderer::renderAll() called without an active camera. Call beginFrame() first.", utils::LogLevel::WARNING);
+            return;
+        }
+
+        for (const auto& mesh : meshQueue) {
+            mesh.draw(*activeCamera, currentAspectRatio);
+        }
+    }
+
+    void Renderer::clear() {
+        meshQueue.clear();
+    }
+}

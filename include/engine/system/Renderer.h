@@ -6,6 +6,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
+#include "graphics/Camera.h"
 #include "graphics/Mesh.h"
 
 namespace sys {
@@ -14,24 +15,22 @@ namespace sys {
     /** @brief Manages core rendering setup and execution */
     class Renderer {
         public:
-            void submit(const graphics::Mesh& mesh) {
-                meshes.push_back(mesh);
-            }
+            Renderer();
+            ~Renderer();
 
-            void renderAll() {
-                for(const auto& mesh : meshes) {
-                    mesh.draw();
-                }
-            }
+            bool init();
+            void shutdown();
 
-            void clear() {
-                meshes.clear();
-            }
+            void beginFrame(const graphics::Camera3D& camera, float aspectRatio);
+
+            void submit(const graphics::Mesh& mesh);
+            void renderAll();
+            void clear();
 
         private:
-            std::vector<graphics::Mesh> meshes;
+            std::vector<graphics::Mesh> meshQueue;
+            const graphics::Camera3D* activeCamera;
+            float currentAspectRatio;
     };
 }
-
-
 #endif
